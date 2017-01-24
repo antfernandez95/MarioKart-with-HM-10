@@ -31,20 +31,20 @@ int main(int argc,char* argv[]){
 
 	while(*argv[1]!= '\0'){
 		if(*argv[1] == 'D'){//You could do a switch for all case
-			tecla=KEY_RIGHT;//Push RIGHT;
-			valor=1;
+			key=KEY_RIGHT;//Push RIGHT;
+			value=1;
 		}
 		if(*argv[1] == 'd'){
-			tecla=KEY_RIGHT;//Release RIGHT
-			valor=0;
+			key=KEY_RIGHT;//Release RIGHT
+			value=0;
 		}
 		if(*argv[1] == 'I'){
-			tecla=KEY_LEFT;//Push LEFT
-			valor=1;
+			key=KEY_LEFT;//Push LEFT
+			value=1;
 		}
 		if(*argv[1] == 'i'){
-			tecla=KEY_LEFT;//Release LEFT
-			valor=0;
+			key=KEY_LEFT;//Release LEFT
+			value=0;
 		}
 
 	argv[1]++;
@@ -52,8 +52,8 @@ int main(int argc,char* argv[]){
 
 		memset(&ev,0,sizeof(ev));
 		ev.type =EV_KEY;
-		ev.code=tecla;
-		ev.value=valor;
+		ev.code=key;
+		ev.value=value;
 		write(fd,&ev,sizeof(ev));
 
 		memset(&ev,0,sizeof(ev));
