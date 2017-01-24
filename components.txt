@@ -1,0 +1,7 @@
+2 accelerometers
+2 arduino (nano better)
+4 3.3v button batteries
+1 raspberri py
+1 MicroSD memory
+1 glove
+wires for connection
