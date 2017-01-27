@@ -54,7 +54,8 @@ int main(int argc,char* argv[]){
 		}
 
 	argv[1]++;
-	}//this function search for a key to put in the keyboard file
+	}//this loop search for a key to put in the keyboard file
+	//you only can write one char
 
 		memset(&ev,0,sizeof(ev));
 		ev.type =EV_KEY;
