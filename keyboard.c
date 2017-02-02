@@ -20,35 +20,42 @@ int main(int argc,char* argv[]){
 	unsigned key=KEY_D;
 	unsigned value=0;//random key and value for initialize
 	if (argc < 2){
-	printf("Use: ./teclado <key>\n",argv[0]);
+	printf("Uso del programa: %s <caracter>\n",argv[0]);
 	return -1;
 	}
 
 	fd = open("/dev/input/event0", O_WRONLY | O_NONBLOCK);//You have to see what is your keyboard file
-// write in the terminal-> cat /proc/bus/input/devices  and search wath is your keyboard
+// write in the terminal-> cat /proc/bus/input/devices
     	if(fd < 0)
         	die("error: open");
 
 	while(*argv[1]!= '\0'){
 		if(*argv[1] == 'D'){//You could do a switch for all case
-			key=KEY_RIGHT;//Push RIGHT;
+			key=KEY_RIGHT;
 			value=1;
 		}
 		if(*argv[1] == 'd'){
-			key=KEY_RIGHT;//Release RIGHT
+			key=KEY_RIGHT;
 			value=0;
 		}
 		if(*argv[1] == 'I'){
-			key=KEY_LEFT;//Push LEFT
+			key=KEY_LEFT;
 			value=1;
 		}
 		if(*argv[1] == 'i'){
-			key=KEY_LEFT;//Release LEFT
+			key=KEY_LEFT;
+			value=0;
+		}if(*argv[1] == 'A'){
+			key=KEY_A;
+			value=1;
+		}if(*argv[1] == 'F'){
+			key=KEY_A;
 			value=0;
 		}
 
 	argv[1]++;
-	}//this function search for a key to put in the keyboard file
+	}//this loop search for a key to put in the keyboard file
+	//you only can write one char
 
 		memset(&ev,0,sizeof(ev));
 		ev.type =EV_KEY;
