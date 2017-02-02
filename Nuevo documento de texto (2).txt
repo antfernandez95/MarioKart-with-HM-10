@@ -1,0 +1,42 @@
+Hardware:
+
+2x Arduino nano
+1x Raspberrypi 3B
+2x HM-10 BT module
+2x MPU-G521
+1x Glove
+1x Shoe
+ 
+
+Part 1: Pinout and schematic
+Connect both of the gy-521 module and the BT modules to the Arduino nano as the next picture shows.
+
+It is important to put the gy-521 on the back of your hand.
+
+The another gy-521 must be on your foot.
+
+HAY QUE PONER FOTOS
+
+Part2: Code
+
+The code uses Kalman filter in order to minimize the noise and improve the accuracy of the gyroscope's sample.
+If you want to read more about Kalman filter: https://en.wikipedia.org/wiki/Kalman_filter
+
+
+There are two different codes,one is for the hand control, the other one is for the foot control.
+
+The most part of the code (the Kalman filter and obtaining all of the GY-521 variables) has been taken from this github repository: "" (thanks a lot for it!)
+The genuine part is in the void loop()
+
+Both codes is based on a state machine.
+This states machines controlls the actual state of the system.Every loop the system gets the sensor samples and checks the result, if there is a valuable change between the initial position(when the system switch on or reset) and the current one the "Hand" code determines if are you going to the left or to the right.However, the "Foot" code determine if your are accelerating or stopping. When the "Hand" code is on "Right state" or "Left state" checks if the sample shows that you're back to the initial position.
+
+Any change makes the program sends a character through Serial that is automatically resended by bluetooth to the raspberrypi. 
+State transition // Code sended
+Initial to Right // "D"
+Initial to Left  //  "I"
+Left to Initial  // "i"
+Right to Initial // "d"
+Accelerating // "A"
+Stopping // "F"
+
