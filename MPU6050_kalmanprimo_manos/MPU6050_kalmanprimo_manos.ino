@@ -26,7 +26,7 @@ Kalman kalmanY;
 /* IMU Data */
 double accX, accY, accZ;
 double gyroX, gyroY, gyroZ;
-double InitialXKalman;
+double InitialYKalman;
 int16_t tempRaw;
 
 double gyroXangle, gyroYangle; // Angle calculate using the gyro only
@@ -80,7 +80,7 @@ void setup() {
 
   kalmanX.setAngle(roll); // Set starting angle
   kalmanY.setAngle(pitch);
-  InitialXKalman = roll;
+  InitialYKalman = pitch;
   gyroXangle = roll;
   gyroYangle = pitch;
   compAngleX = roll;
@@ -188,25 +188,25 @@ void loop() {
 #ifdef SERIALBT // define for BT comm
   switch(estado){
     case PARADO:
-      if(kalAngleX-InitialXKalman>30){
+      if(kalAngleY-InitialYKalman>30){
           
           estado = GIRANDOADER;
           Serial.println("D");
         }
-        if(kalAngleX-InitialXKalman<-30){
+        if(kalAngleY-InitialYKalman<-30){
             estado = GIRANDOAIZQ;
             Serial.println("I");  
         }
         break;
         case GIRANDOADER:
-        if(kalAngleX-InitialXKalman<20){
+        if(kalAngleY-InitialYKalman<20){
             estado = PARADO;
             Serial.println("d"); 
         }
         break;
         case GIRANDOAIZQ:
         
-        if(kalAngleX-InitialXKalman>-20){
+        if(kalAngleY-InitialYKalman>-20){
             estado = PARADO;
             Serial.println("i"); 
         }

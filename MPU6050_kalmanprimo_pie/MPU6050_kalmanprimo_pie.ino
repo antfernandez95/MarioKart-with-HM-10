@@ -85,8 +85,8 @@ void setup() {
   gyroYangle = pitch;
   compAngleX = roll;
   compAngleY = pitch;
-   modulo_inicial = pow(kalAngleX,2)+pow(kalAngleX,2);
-  modulo_inicial = sqrt(modulo);
+   modulo_inicial = pow(roll,2)+pow(pitch,2);
+  modulo_inicial = sqrt(modulo_inicial);
 
   timer = micros();
 }
@@ -187,7 +187,7 @@ void loop() {
   Serial.print(gyroYangle); Serial.print("\t");
   Serial.print(compAngleY); Serial.print("\t");*/
   //Serial.print(kalAngleY); Serial.print("\n");
-  //Serial.print(modulo); Serial.print("\n");
+  //Serial.print(modulo_inicial-modulo); Serial.print("\n");
 /*while(kalAngleX-InitialXKalman<30){
   estado = ACELERA;
 }*/
@@ -195,14 +195,14 @@ void loop() {
 #ifdef SERIALBT // define for BT comm
   switch(estado){
     case ACELERA:
-      if(modulo_inicial-modulo<-15){
+      if(modulo_inicial-modulo<-50){
           
           estado = FRENA;
           Serial.println("F");
         }
         break;
         case FRENA:
-        if(modulo_inicial-modulo>-10){
+        if(modulo_inicial-modulo>-48){
             estado = ACELERA;
             Serial.println("A");  
         }
